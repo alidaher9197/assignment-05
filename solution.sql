@@ -108,4 +108,18 @@ courses.course_id=enrollments.course_id;
 DELETE FROM departments WHERE dept_id=3;
 --task12 delete and my observation is that all related health_records and enrollments are deleted automatically
 DELETE FROM students WHERE student_id=5;
-
+--task13
+--total students
+SELECT count(student_id) AS total FROM students ;
+--average credits of courses
+SELECT AVG(credits) AS average FROM courses;
+--maximum credits
+SELECT MAX(credits) AS maximum FROM courses;
+--minimum credits
+SELECT MIN(credits) AS maximum FROM courses;
+--total number of students having blood group A+
+SELECT count(students.student_id) 
+AS total FROM students 
+INNER JOIN health_records 
+ON students.student_id=health_records.student_id
+WHERE health_records.blood_group="A+";
