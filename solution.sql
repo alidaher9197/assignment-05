@@ -116,7 +116,7 @@ SELECT AVG(credits) AS average FROM courses;
 --maximum credits
 SELECT MAX(credits) AS maximum FROM courses;
 --minimum credits
-SELECT MIN(credits) AS maximum FROM courses;
+SELECT MIN(credits) AS minimum FROM courses;
 --total number of students having blood group A+
 SELECT count(students.student_id) 
 AS total FROM students 
