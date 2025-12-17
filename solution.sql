@@ -1,5 +1,5 @@
 CREATE DATABASE university_db;
-
+USE university_db;
 CREATE TABLE departments(
     dept_id INT PRIMARY KEY AUTO_INCREMENT,
     dept_name VARCHAR(50) NOT NULL
@@ -16,12 +16,13 @@ CREATE TABLE courses(
 CREATE TABLE students(
     student_id INT PRIMARY KEY AUTO_INCREMENT,
     student_name VARCHAR(100) NOT NULL
-)
+);
 
 CREATE TABLE enrollments(
     enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
-    student_id INT,
-    course_id INT,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    UNIQUE(student_id, course_id),
     FOREIGN KEY(student_id) REFERENCES students(student_id) ON DELETE CASCADE,
     FOREIGN KEY(course_id) REFERENCES courses(course_id) ON DELETE CASCADE
 );
@@ -29,8 +30,8 @@ CREATE TABLE enrollments(
 CREATE TABLE health_records(
     record_id INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT,
-    FOREIGN KEY(student_id) REFERENCES students(student_id) ON DELETE CASCADE,
-    blood_group VARCHAR(5)
+    blood_group VARCHAR(5),
+    FOREIGN KEY(student_id) REFERENCES students(student_id) ON DELETE CASCADE
 );
 
 INSERT INTO departments(dept_name)
@@ -45,3 +46,29 @@ VALUES
 ("algorithms",3,1),
 ("calculus",4,2),
 ("quantum mechanics",5,3);
+
+INSERT INTO students(student_name)
+VALUES
+("alice"),
+("bob"),
+("charlie"),
+("samy"),
+("eva");
+
+INSERT INTO enrollments(student_id,course_id) 
+VALUES 
+(1,1),
+(1,2),
+(2,1),
+(3,2),
+(3,3),
+(4,3),
+(4,4);
+
+INSERT INTO health_records(student_id,blood_group) 
+VALUES 
+(1,"A+"),
+(2,"B+"),
+(3,"O-"),
+(4,"AB+"),
+(5,"A-");
